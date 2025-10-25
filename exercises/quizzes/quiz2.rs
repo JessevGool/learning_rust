@@ -23,11 +23,46 @@ enum Command {
     Append(usize),
 }
 
-mod my_module {
+impl Command {
+    fn uppercase(input: String) -> String {
+        input.to_uppercase()
+    }
+
+    fn trim(input: String) -> String {
+        input.trim().to_string()
+    }
+
+    fn append(mut input: String,amount: usize) -> String {
+        for _ in 0..amount  {
+            input = input + "bar";
+        }
+        input
+    }
+}
+
+pub mod my_module {
     use super::Command;
 
     // TODO: Complete the function as described above.
     // pub fn transformer(input: ???) -> ??? { ??? }
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
+        let mut output: Vec<String> = Vec::new();
+        for value in input {
+            match value.1 {
+                Command::Uppercase => {
+                    output.push(self::Command::uppercase(value.0));
+                }
+                Command::Trim => {
+                    output.push(self::Command::trim(value.0));
+                }
+                Command::Append(amount) => {
+                    output.push(self::Command::append(value.0,amount));
+                }
+            }
+        }
+
+        output
+    }
 }
 
 fn main() {
@@ -38,7 +73,9 @@ fn main() {
 mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
     // use ???;
+    use crate::my_module::transformer;
     use super::Command;
+    
 
     #[test]
     fn it_works() {
